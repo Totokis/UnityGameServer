@@ -2,15 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-// using PlayFab;
-// using PlayFab.MultiplayerAgent.Model;
+using PlayFab;
+using PlayFab.MultiplayerAgent.Model;
 using UnityEngine;
 
 public class Configurator : MonoBehaviour
 {
    [SerializeField] public bool isRemote = false;
    [SerializeField] bool isDebugging = false;
-   //List<ConnectedPlayer> _connectedPlayers;
+   List<ConnectedPlayer> _connectedPlayers;
 
    private void Awake()
    {
@@ -22,16 +22,16 @@ public class Configurator : MonoBehaviour
    private void StartRemoteServer()
    {
       Debug.Log("[ServerStartUp].StartRemoteServer");
-      // _connectedPlayers = new List<ConnectedPlayer>();
-      // PlayFabMultiplayerAgentAPI.Start();
-      // PlayFabMultiplayerAgentAPI.IsDebugging = isDebugging;
-      // PlayFabMultiplayerAgentAPI.OnMaintenanceCallback += OnMaintenance;
-      // PlayFabMultiplayerAgentAPI.OnShutDownCallback += OnShutdown;
-      // PlayFabMultiplayerAgentAPI.OnServerActiveCallback += OnServerActive;
-      // PlayFabMultiplayerAgentAPI.OnAgentErrorCallback += OnAgentError;
+       _connectedPlayers = new List<ConnectedPlayer>();
+       PlayFabMultiplayerAgentAPI.Start();
+       PlayFabMultiplayerAgentAPI.IsDebugging = isDebugging;
+       PlayFabMultiplayerAgentAPI.OnMaintenanceCallback += OnMaintenance;
+       PlayFabMultiplayerAgentAPI.OnShutDownCallback += OnShutdown;
+       PlayFabMultiplayerAgentAPI.OnServerActiveCallback += OnServerActive;
+       PlayFabMultiplayerAgentAPI.OnAgentErrorCallback += OnAgentError;
 
-      //Server.OnPlayerAdded.AddListener(OnPlayerAdded);
-      //Server.OnPlayerRemoved.AddListener(OnPlayerRemoved);
+      Server.OnPlayerAdded.AddListener(OnPlayerAdded);
+      Server.OnPlayerRemoved.AddListener(OnPlayerRemoved);
 
       StartCoroutine(ReadyForPlayers());
       StartCoroutine(ShutdownServerInXTime());
@@ -45,7 +45,7 @@ public class Configurator : MonoBehaviour
    IEnumerator ReadyForPlayers()
    {
       yield return new WaitForSeconds(.5f);
-      //PlayFabMultiplayerAgentAPI.ReadyForPlayers();
+      PlayFabMultiplayerAgentAPI.ReadyForPlayers();
    }
 
    private void OnServerActive()
@@ -56,23 +56,23 @@ public class Configurator : MonoBehaviour
 
    private void OnPlayerRemoved(string playfabId)
    {
-      // ConnectedPlayer player = _connectedPlayers.Find(x => x.PlayerId.Equals(playfabId, StringComparison.OrdinalIgnoreCase));
-      // _connectedPlayers.Remove(player);
-      // PlayFabMultiplayerAgentAPI.UpdateConnectedPlayers(_connectedPlayers);
+      ConnectedPlayer player = _connectedPlayers.Find(x => x.PlayerId.Equals(playfabId, StringComparison.OrdinalIgnoreCase));
+      _connectedPlayers.Remove(player);
+      PlayFabMultiplayerAgentAPI.UpdateConnectedPlayers(_connectedPlayers);
       CheckPlayerCountToShutdown();
    }
 
    private void OnPlayerAdded(string playfabId)
    {
-      // _connectedPlayers.Add(new ConnectedPlayer(playfabId));
-      // PlayFabMultiplayerAgentAPI.UpdateConnectedPlayers(_connectedPlayers);
+      _connectedPlayers.Add(new ConnectedPlayer(playfabId));
+      PlayFabMultiplayerAgentAPI.UpdateConnectedPlayers(_connectedPlayers);
    }
    private void CheckPlayerCountToShutdown()
    {
-      // if (_connectedPlayers.Count <= 0)
-      // {
-      //    StartShutdownProcess();
-      // }
+      if (_connectedPlayers.Count <= 0)
+      {
+         StartShutdownProcess();
+      }
    }
 
 
