@@ -1,11 +1,7 @@
-using System;
-
 namespace PlayFab.Internal
 {
-    [Obsolete("This logging utility has been deprecated. Use UnityEngine.Debug.Log")]
     public static class Log
     {
-        [Obsolete("Debug is deprecated.")]
         public static void Debug(string text, params object[] args)
         {
             if ((PlayFabSettings.LogLevel & PlayFabLogLevel.Debug) != 0)
@@ -14,7 +10,6 @@ namespace PlayFab.Internal
             }
         }
 
-        [Obsolete("Info is deprecated.")]
         public static void Info(string text, params object[] args)
         {
             if ((PlayFabSettings.LogLevel & PlayFabLogLevel.Info) != 0)
@@ -23,7 +18,6 @@ namespace PlayFab.Internal
             }
         }
 
-        [Obsolete("Warning is deprecated.")]
         public static void Warning(string text, params object[] args)
         {
             if ((PlayFabSettings.LogLevel & PlayFabLogLevel.Warning) != 0)
@@ -32,7 +26,6 @@ namespace PlayFab.Internal
             }
         }
 
-        [Obsolete("Error is deprecated.")]
         public static void Error(string text, params object[] args)
         {
             if ((PlayFabSettings.LogLevel & PlayFabLogLevel.Error) != 0)

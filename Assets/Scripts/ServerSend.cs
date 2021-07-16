@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class ServerSend 
 {
-           public static void Welcome(int toClient, string message)
+    public static void Welcome(int toClient, string message)
         {
             using (Packet packet = new Packet((int)ServerPackets.Welcome))
             {
@@ -25,6 +25,15 @@ public class ServerSend
             packet.Write(clientPlayer.transform.rotation);
                 
             SendTcpData(toClient,packet);
+        }
+
+        public static void SendMessageToAll(string message)
+        {
+            using (Packet packet = new Packet((int)ServerPackets.Message))
+            {
+                packet.Write(message); 
+                SendTcpDataToAll(packet);
+            }
         }
         
         private static void SendTcpData(int toClient, Packet packet)

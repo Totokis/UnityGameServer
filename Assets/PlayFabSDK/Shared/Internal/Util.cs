@@ -1,3 +1,4 @@
+using PlayFab.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,7 +11,7 @@ using System.Reflection;
 
 namespace PlayFab.Internal
 {
-    public static class PlayFabUtil
+    internal static class PlayFabUtil
     {
         static PlayFabUtil() { }
 
@@ -133,8 +134,7 @@ namespace PlayFab.Internal
 
             if (!string.IsNullOrEmpty(envFileContent))
             {
-                var serializer = PluginManager.GetPlugin<ISerializerPlugin>(PluginContract.PlayFab_Serializer);
-                var envJson = serializer.DeserializeObject<Dictionary<string, object>>(envFileContent);
+                JsonObject envJson = PlayFabSimpleJson.DeserializeObject<JsonObject>(envFileContent);
                 try
                 {
                     object result;

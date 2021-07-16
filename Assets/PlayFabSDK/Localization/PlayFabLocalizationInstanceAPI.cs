@@ -13,30 +13,35 @@ namespace PlayFab
     /// </summary>
     public class PlayFabLocalizationInstanceAPI : IPlayFabInstanceApi
     {
-        public readonly PlayFabApiSettings apiSettings = null;
-        public readonly PlayFabAuthenticationContext authenticationContext = null;
+        public PlayFabApiSettings apiSettings = null;
+        private PlayFabAuthenticationContext authenticationContext = null;
+
+        public PlayFabLocalizationInstanceAPI() { }
+
+        public PlayFabLocalizationInstanceAPI(PlayFabApiSettings settings)
+        {
+            apiSettings = settings;
+        }
 
         public PlayFabLocalizationInstanceAPI(PlayFabAuthenticationContext context)
         {
-            if (context == null)
-                throw new PlayFabException(PlayFabExceptionCode.AuthContextRequired, "Context cannot be null, create a PlayFabAuthenticationContext for each player in advance, or call <PlayFabClientInstanceAPI>.GetAuthenticationContext()");
             authenticationContext = context;
         }
 
         public PlayFabLocalizationInstanceAPI(PlayFabApiSettings settings, PlayFabAuthenticationContext context)
         {
-            if (context == null)
-                throw new PlayFabException(PlayFabExceptionCode.AuthContextRequired, "Context cannot be null, create a PlayFabAuthenticationContext for each player in advance, or call <PlayFabClientInstanceAPI>.GetAuthenticationContext()");
             apiSettings = settings;
             authenticationContext = context;
         }
 
-        /// <summary>
-        /// Verify entity login.
-        /// </summary>
-        public bool IsEntityLoggedIn()
+        public void SetAuthenticationContext(PlayFabAuthenticationContext context)
         {
-            return authenticationContext == null ? false : authenticationContext.IsEntityLoggedIn();
+            authenticationContext = context;
+        }
+
+        public PlayFabAuthenticationContext GetAuthenticationContext()
+        {
+            return authenticationContext;
         }
 
         /// <summary>
@@ -57,9 +62,7 @@ namespace PlayFab
         public void GetLanguageList(GetLanguageListRequest request, Action<GetLanguageListResponse> resultCallback, Action<PlayFabError> errorCallback, object customData = null, Dictionary<string, string> extraHeaders = null)
         {
             var context = (request == null ? null : request.AuthenticationContext) ?? authenticationContext;
-            var callSettings = apiSettings ?? PlayFabSettings.staticSettings;
-            if (!context.IsEntityLoggedIn()) throw new PlayFabException(PlayFabExceptionCode.NotLoggedIn,"Must be logged in to call this method");
-            PlayFabHttp.MakeApiCall("/Locale/GetLanguageList", request, AuthType.EntityToken, resultCallback, errorCallback, customData, extraHeaders, context, callSettings, this);
+            PlayFabHttp.MakeApiCall("/Locale/GetLanguageList", request, AuthType.EntityToken, resultCallback, errorCallback, customData, extraHeaders, context, apiSettings, this);
         }
 
     }

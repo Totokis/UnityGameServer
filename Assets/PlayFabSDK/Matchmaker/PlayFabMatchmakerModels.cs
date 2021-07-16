@@ -33,11 +33,10 @@ namespace PlayFab.MatchmakerModels
     }
 
     /// <summary>
-    /// A unique instance of an item in a user's inventory. Note, to retrieve additional information for an item such as Tags,
-    /// Description that are the same across all instances of the item, a call to GetCatalogItems is required. The ItemID of can
-    /// be matched to a catalog entry, which contains the additional information. Also note that Custom Data is only set when
-    /// the User's specific instance has updated the CustomData via a call to UpdateUserInventoryItemCustomData. Other fields
-    /// such as UnitPrice and UnitCurrency are only set when the item was granted via a purchase.
+    /// A unique instance of an item in a user's inventory. Note, to retrieve additional information for an item instance (such
+    /// as Tags, Description, or Custom Data that are set on the root catalog item), a call to GetCatalogItems is required. The
+    /// Item ID of the instance can then be matched to a catalog entry, which contains the additional information. Also note
+    /// that Custom Data is only set here from a call to UpdateUserInventoryItemCustomData.
     /// </summary>
     [Serializable]
     public class ItemInstance : PlayFabBaseModel
@@ -60,8 +59,7 @@ namespace PlayFab.MatchmakerModels
         /// </summary>
         public string CatalogVersion;
         /// <summary>
-        /// A set of custom key-value pairs on the instance of the inventory item, which is not to be confused with the catalog
-        /// item's custom data.
+        /// A set of custom key-value pairs on the inventory item.
         /// </summary>
         public Dictionary<string,string> CustomData;
         /// <summary>
@@ -93,11 +91,11 @@ namespace PlayFab.MatchmakerModels
         /// </summary>
         public int? RemainingUses;
         /// <summary>
-        /// Currency type for the cost of the catalog item. Not available when granting items.
+        /// Currency type for the cost of the catalog item.
         /// </summary>
         public string UnitCurrency;
         /// <summary>
-        /// Cost of the catalog item in the given currency. Not available when granting items.
+        /// Cost of the catalog item in the given currency.
         /// </summary>
         public uint UnitPrice;
         /// <summary>
@@ -109,10 +107,6 @@ namespace PlayFab.MatchmakerModels
     [Serializable]
     public class PlayerJoinedRequest : PlayFabRequestCommon
     {
-        /// <summary>
-        /// The optional custom tags associated with the request (e.g. build number, external trace identifiers, etc.).
-        /// </summary>
-        public Dictionary<string,string> CustomTags;
         /// <summary>
         /// Unique identifier of the Game Server Instance the user is joining. This must be a Game Server Instance started with the
         /// Matchmaker/StartGame API.
@@ -132,10 +126,6 @@ namespace PlayFab.MatchmakerModels
     [Serializable]
     public class PlayerLeftRequest : PlayFabRequestCommon
     {
-        /// <summary>
-        /// The optional custom tags associated with the request (e.g. build number, external trace identifiers, etc.).
-        /// </summary>
-        public Dictionary<string,string> CustomTags;
         /// <summary>
         /// Unique identifier of the Game Server Instance the user is leaving. This must be a Game Server Instance started with the
         /// Matchmaker/StartGame API.
@@ -174,10 +164,6 @@ namespace PlayFab.MatchmakerModels
         /// Custom command line argument when starting game server process.
         /// </summary>
         public string CustomCommandLineData;
-        /// <summary>
-        /// The optional custom tags associated with the request (e.g. build number, external trace identifiers, etc.).
-        /// </summary>
-        public Dictionary<string,string> CustomTags;
         /// <summary>
         /// HTTP endpoint URL for receiving game status events, if using an external matchmaker. When the game ends, PlayFab will
         /// make a POST request to this URL with the X-SecretKey header set to the value of the game's secret and an
@@ -222,10 +208,6 @@ namespace PlayFab.MatchmakerModels
     [Serializable]
     public class UserInfoRequest : PlayFabRequestCommon
     {
-        /// <summary>
-        /// The optional custom tags associated with the request (e.g. build number, external trace identifiers, etc.).
-        /// </summary>
-        public Dictionary<string,string> CustomTags;
         /// <summary>
         /// Minimum catalog version for which data is requested (filters the results to only contain inventory items which have a
         /// catalog version of this or higher).

@@ -259,6 +259,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 6665048704522516553, guid: b459d5a3675994a97bb717d6a0f2d6c9, type: 3}
+  configurator: {fileID: 1177928884}
 --- !u!4 &783497208
 Transform:
   m_ObjectHideFlags: 0
@@ -399,4 +400,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4732fd9d2a85f451db9061998f1302fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRemote: 0
+  isRemote: 1
+  isDebugging: 0

@@ -7,6 +7,7 @@ public class NetworkManager : MonoBehaviour
 {
     public static NetworkManager Instance;
     [SerializeField] GameObject playerPrefab;
+    [SerializeField] Configurator configurator;
     private void Awake()
     {
         if (Instance == null)
@@ -26,6 +27,7 @@ public class NetworkManager : MonoBehaviour
     #if UNITY_EDITOR
         Debug.Log("Build the project to start the server");
     #else
+    if(!configurator.isRemote)
         Server.Start(5,26950);
     #endif
     }

@@ -1,12 +1,13 @@
 using System;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
 using PlayFab.Internal;
+using PlayFab.Json;
 
 namespace PlayFab
 {
     public class PluginManager
     {
-        private ConcurrentDictionary<PluginContractKey, IPlayFabPlugin> plugins = new ConcurrentDictionary<PluginContractKey, IPlayFabPlugin>(new PluginContractKeyComparator());
+        private Dictionary<PluginContractKey, IPlayFabPlugin> plugins = new Dictionary<PluginContractKey, IPlayFabPlugin>(new PluginContractKeyComparator());
 
         /// <summary>
         /// The singleton instance of plugin manager.
@@ -51,7 +52,7 @@ namespace PlayFab
                 switch (contract)
                 {
                     case PluginContract.PlayFab_Serializer:
-                        plugin = this.CreatePlugin<PlayFab.Json.SimpleJsonInstance>();
+                        plugin = this.CreatePlugin<SimpleJsonInstance>();
                         break;
                     case PluginContract.PlayFab_Transport:
                         plugin = this.CreatePlayFabTransportPlugin();
@@ -79,7 +80,7 @@ namespace PlayFab
 
         private IPlayFabPlugin CreatePlugin<T>() where T : IPlayFabPlugin, new()
         {
-            return (IPlayFabPlugin)System.Activator.CreateInstance(typeof(T));
+            return (IPlayFabPlugin)Activator.CreateInstance(typeof(T));
         }
 
         private ITransportPlugin CreatePlayFabTransportPlugin()

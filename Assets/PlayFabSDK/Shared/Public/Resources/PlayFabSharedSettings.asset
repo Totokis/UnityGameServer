@@ -16,10 +16,14 @@ MonoBehaviour:
   DeveloperSecretKey: HZGXBTPYGMH31SUQ9O1TJ8NG9UQ7AE7E1IEQC395KPOBBUY6QM
   ProductionEnvironmentUrl: 
   RequestType: 2
+  AdvertisingIdType: 
+  AdvertisingIdValue: 
+  DisableAdvertising: 0
   DisableDeviceInfo: 0
   DisableFocusTimeCollection: 0
   RequestTimeout: 2000
   RequestKeepAlive: 1
+  CompressApiData: 1
   LogLevel: 12
   LoggerHost: 
   LoggerPort: 0

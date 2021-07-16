@@ -8,13 +8,13 @@ namespace PlayFab.PfEditor
         [MenuItem("PlayFab/GettingStarted")]
         private static void GettingStarted()
         {
-            Application.OpenURL("https://docs.microsoft.com/en-us/gaming/playfab/index#pivot=documentation&panel=quickstarts");
+            Application.OpenURL("https://api.playfab.com/docs/beginners-guide");
         }
 
         [MenuItem("PlayFab/Docs")]
         private static void Documentation()
         {
-            Application.OpenURL("https://docs.microsoft.com/en-us/gaming/playfab/api-references/");
+            Application.OpenURL("https://api.playfab.com/documentation");
         }
 
         [MenuItem("PlayFab/Dashboard")]

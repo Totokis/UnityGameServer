@@ -37,15 +37,8 @@ namespace PlayFab.Public
         private Queue<EventsModels.EventContents> eventsRequests = new Queue<EventsModels.EventContents>();
 
         private EventsModels.EntityKey entityKey = new EventsModels.EntityKey();
-        private const string eventNamespace = "com.playfab.events.sessions";
+        private const String eventNamespace = "com.playfab.events.sessions";
         private const int maxBatchSizeInEvents = 10;
-
-        private PlayFabEventsInstanceAPI eventApi;
-
-        public ScreenTimeTracker()
-        {
-            eventApi = new PlayFabEventsInstanceAPI(PlayFabSettings.staticPlayer);
-        }
 
         /// <summary>
         /// Start session, the function responsible for creating SessionID and gathering information about user and device
@@ -163,7 +156,7 @@ namespace PlayFab.Public
         /// </summary>
         public void Send()
         {
-            if (PlayFabSettings.staticPlayer.IsClientLoggedIn() && (isSending == false))
+            if ((PlayFabClientAPI.IsClientLoggedIn()) && (isSending == false))
             {
                 isSending = true;
 
@@ -178,7 +171,7 @@ namespace PlayFab.Public
 
                 if (request.Events.Count > 0)
                 {
-                    eventApi.WriteEvents(request, EventSentSuccessfulCallback, EventSentErrorCallback);
+                    PlayFabEventsAPI.WriteEvents(request, EventSentSuccessfulCallback, EventSentErrorCallback);
                 }
 
                 isSending = false;

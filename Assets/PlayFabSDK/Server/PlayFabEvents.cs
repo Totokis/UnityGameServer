@@ -109,8 +109,6 @@ namespace PlayFab.Events
         public event PlayFabResultEvent<GetServerCustomIDsFromPlayFabIDsResult> OnServerGetServerCustomIDsFromPlayFabIDsResultEvent;
         public event PlayFabRequestEvent<GetSharedGroupDataRequest> OnServerGetSharedGroupDataRequestEvent;
         public event PlayFabResultEvent<GetSharedGroupDataResult> OnServerGetSharedGroupDataResultEvent;
-        public event PlayFabRequestEvent<GetStoreItemsServerRequest> OnServerGetStoreItemsRequestEvent;
-        public event PlayFabResultEvent<GetStoreItemsResult> OnServerGetStoreItemsResultEvent;
         public event PlayFabRequestEvent<GetTimeRequest> OnServerGetTimeRequestEvent;
         public event PlayFabResultEvent<GetTimeResult> OnServerGetTimeResultEvent;
         public event PlayFabRequestEvent<GetTitleDataRequest> OnServerGetTitleDataRequestEvent;
@@ -145,20 +143,14 @@ namespace PlayFab.Events
         public event PlayFabResultEvent<GrantItemsToUserResult> OnServerGrantItemsToUserResultEvent;
         public event PlayFabRequestEvent<GrantItemsToUsersRequest> OnServerGrantItemsToUsersRequestEvent;
         public event PlayFabResultEvent<GrantItemsToUsersResult> OnServerGrantItemsToUsersResultEvent;
-        public event PlayFabRequestEvent<LinkPSNAccountRequest> OnServerLinkPSNAccountRequestEvent;
-        public event PlayFabResultEvent<LinkPSNAccountResult> OnServerLinkPSNAccountResultEvent;
         public event PlayFabRequestEvent<LinkServerCustomIdRequest> OnServerLinkServerCustomIdRequestEvent;
         public event PlayFabResultEvent<LinkServerCustomIdResult> OnServerLinkServerCustomIdResultEvent;
         public event PlayFabRequestEvent<LinkXboxAccountRequest> OnServerLinkXboxAccountRequestEvent;
         public event PlayFabResultEvent<LinkXboxAccountResult> OnServerLinkXboxAccountResultEvent;
         public event PlayFabRequestEvent<LoginWithServerCustomIdRequest> OnServerLoginWithServerCustomIdRequestEvent;
         public event PlayFabResultEvent<ServerLoginResult> OnServerLoginWithServerCustomIdResultEvent;
-        public event PlayFabRequestEvent<LoginWithSteamIdRequest> OnServerLoginWithSteamIdRequestEvent;
-        public event PlayFabResultEvent<ServerLoginResult> OnServerLoginWithSteamIdResultEvent;
         public event PlayFabRequestEvent<LoginWithXboxRequest> OnServerLoginWithXboxRequestEvent;
         public event PlayFabResultEvent<ServerLoginResult> OnServerLoginWithXboxResultEvent;
-        public event PlayFabRequestEvent<LoginWithXboxIdRequest> OnServerLoginWithXboxIdRequestEvent;
-        public event PlayFabResultEvent<ServerLoginResult> OnServerLoginWithXboxIdResultEvent;
         public event PlayFabRequestEvent<ModifyItemUsesRequest> OnServerModifyItemUsesRequestEvent;
         public event PlayFabResultEvent<ModifyItemUsesResult> OnServerModifyItemUsesResultEvent;
         public event PlayFabRequestEvent<MoveItemToCharacterFromCharacterRequest> OnServerMoveItemToCharacterFromCharacterRequestEvent;
@@ -225,8 +217,6 @@ namespace PlayFab.Events
         public event PlayFabResultEvent<ModifyCharacterVirtualCurrencyResult> OnServerSubtractCharacterVirtualCurrencyResultEvent;
         public event PlayFabRequestEvent<SubtractUserVirtualCurrencyRequest> OnServerSubtractUserVirtualCurrencyRequestEvent;
         public event PlayFabResultEvent<ModifyUserVirtualCurrencyResult> OnServerSubtractUserVirtualCurrencyResultEvent;
-        public event PlayFabRequestEvent<UnlinkPSNAccountRequest> OnServerUnlinkPSNAccountRequestEvent;
-        public event PlayFabResultEvent<UnlinkPSNAccountResult> OnServerUnlinkPSNAccountResultEvent;
         public event PlayFabRequestEvent<UnlinkServerCustomIdRequest> OnServerUnlinkServerCustomIdRequestEvent;
         public event PlayFabResultEvent<UnlinkServerCustomIdResult> OnServerUnlinkServerCustomIdResultEvent;
         public event PlayFabRequestEvent<UnlinkXboxAccountRequest> OnServerUnlinkXboxAccountRequestEvent;
