@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Server
 {
+    public static UnityEvent<String> OnPlayerAdded;
+    public static UnityEvent<String> OnPlayerRemoved;
   public static int MaxPlayers { get; private set; }
 
         private static int Port { get; set; }
@@ -33,7 +36,8 @@ public class Server
             _udpListener = new UdpClient(Port);
             _udpListener.BeginReceive(UdpReceiveCallback, null);
             Debug.Log("Server stared on: "+port);
-            
+            OnPlayerAdded = new UnityEvent<String>();
+            OnPlayerRemoved = new UnityEvent<String>();
         }
         private static void UdpReceiveCallback(IAsyncResult result)
         {
@@ -121,4 +125,5 @@ public class Server
             };
             Debug.Log("Initialize packets");
         }
+        
     }
