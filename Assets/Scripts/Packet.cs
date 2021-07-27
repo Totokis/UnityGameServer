@@ -11,6 +11,7 @@ using UnityEngine;
         SpawnPlayer,
         PlayerPosition,
         PlayerRotation,
+        PlayerDisconnect,
         Message,
     }
 

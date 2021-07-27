@@ -112,4 +112,13 @@ public class ServerSend
             }
         }
 
+        public static void PlayerDisconnected(int playerId)
+        {
+            using (Packet packet = new Packet((int)ServerPackets.PlayerDisconnect))
+            {
+                packet.Write(playerId);
+                SendTcpDataToAll(packet);
+            }
+        }
+
 }
