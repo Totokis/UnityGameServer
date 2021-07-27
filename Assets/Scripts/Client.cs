@@ -212,6 +212,8 @@ public class Client
         Player = null;
         Tcp.Disconnect();
         Udp.Disconnect();
+        
+        ServerSend.PlayerDisconnected(Id);  
 
     }
 
