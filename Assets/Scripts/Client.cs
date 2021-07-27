@@ -45,7 +45,6 @@ public class Client
             _receiveBuffer = new byte[dataBufferSize];
 
             _stream.BeginRead(_receiveBuffer, 0, dataBufferSize, ReceiveCallback, null);
-            Server.OnPlayerAdded.Invoke(_id.ToString());
             ServerSend.Welcome(_id,"Welcome to the server" );
             
         }
@@ -213,8 +212,7 @@ public class Client
         Player = null;
         Tcp.Disconnect();
         Udp.Disconnect();
-        Server.OnPlayerRemoved.Invoke(Id.ToString());
-        
+
     }
 
 }
