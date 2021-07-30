@@ -115,11 +115,17 @@ public class Server
 
             PacketHandlers = new Dictionary<int, PacketHandler>
             {
-                { (int)ClientPackets.welcomeReceived, ServerHandle.WelcomeReceived },
-                { (int)ClientPackets.playerMovement, ServerHandle.PlayerMovement },
+                { (int)ClientPackets.WelcomeReceived, ServerHandle.WelcomeReceived },
+                { (int)ClientPackets.PlayerMovement, ServerHandle.PlayerMovement },
+                { (int)ClientPackets.PlayerShoot, ServerHandle.PlayerShoot},
                 
             };
             Debug.Log("Initialize packets");
         }
-        
-    }
+
+        public static void Stop()
+        {
+            _tcpListener.Stop();
+            _udpListener.Close();
+        }
+}
