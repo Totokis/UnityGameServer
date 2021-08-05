@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -16,7 +17,9 @@ public class Player : MonoBehaviour
     
     public int Id => id;
     public string Username => username;
-    
+
+    public float Health => health;
+
     bool[] _inputs;
     float _yVelocity = 0f;
 
@@ -28,6 +31,10 @@ public class Player : MonoBehaviour
     }
     public void FixedUpdate()
     {
+        if (health <= 0f)
+        {
+            return;
+        }
         var inputDirection = Vector2.zero;
         if (_inputs[0])
             inputDirection.y += 1;
@@ -81,11 +88,14 @@ public class Player : MonoBehaviour
 
     public void Shoot(Vector3 viewDirection)
     {
+        Debug.DrawRay(shootOrigin.position,viewDirection*25f, Color.red,5f);
         if (Physics.Raycast(shootOrigin.position, viewDirection, out RaycastHit hit, 25f))
         {
-            if (hit.collider.CompareTag("Player"))//TODO Change it to something else than Tag
+            Debug.Log($"A {hit.collider.name} has been hit");
+            if (hit.collider.GetComponent<Player>()!=null)
             {
-                
+                Debug.Log("a player has been shot");
+                hit.collider.GetComponent<Player>().TakeDamage(50f);
             }
         }
         
@@ -102,7 +112,21 @@ public class Player : MonoBehaviour
         if (health <= 0f)
         {
             health = 0f;
-            
+            characterController.enabled = false;
+            transform.position = new Vector3(0f, 25f, 0f);
+            ServerSend.PlayerPosition(this);
+            StartCoroutine(Respawn());
         }
+        
+        ServerSend.PlayerHealth(this);
+    }
+
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(5f);
+
+        health = maxHealth;
+        characterController.enabled = true;
+        ServerSend.PlayerRespawned(this);
     }
 }

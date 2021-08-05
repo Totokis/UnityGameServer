@@ -121,4 +121,25 @@ public class ServerSend
             }
         }
 
+        public static void PlayerHealth(Player player)
+        {
+            using (Packet packet = new Packet((int)ServerPackets.PlayerHealth))
+            {
+                packet.Write(player.Id);
+                packet.Write(player.Health);
+                SendTcpDataToAll(packet);
+            } 
+        }
+
+        public static void PlayerRespawned(Player player)
+        {
+            using (Packet packet = new Packet((int)ServerPackets.PlayerRespawned))
+            {
+                packet.Write(player.Id);
+                SendTcpDataToAll(packet);
+            }
+        }
+        
+        
+
 }

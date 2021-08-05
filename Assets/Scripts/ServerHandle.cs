@@ -35,6 +35,6 @@ public class ServerHandle
     {
         Vector3 shootDirection = packet.ReadVector3();
         Server.Clients[fromClient].Player.Shoot(shootDirection);
-    }
+    } 
     
 }
