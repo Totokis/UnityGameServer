@@ -12,6 +12,8 @@ using UnityEngine;
         PlayerPosition,
         PlayerRotation,
         PlayerDisconnect,
+        PlayerHealth,
+        PlayerRespawned,
         Message,
     }
 
@@ -21,7 +23,6 @@ using UnityEngine;
         WelcomeReceived = 1,
         PlayerMovement,
         PlayerShoot,
-        Message
     }
 
     public class Packet : IDisposable
